@@ -1,4 +1,4 @@
-<img src="rasterviz-1.1.0/icon.png" alt="RasterViz Icon" width="80"/>
+<img src="rasterviz-1.1.0/icon.png" alt="RasterViz Icon" width="80"/> 
 
 # **RasterViz** — QGIS Plugin
 
