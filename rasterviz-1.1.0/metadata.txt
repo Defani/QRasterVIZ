@@ -1,0 +1,19 @@
+[general]
+name=RasterViz
+qgisMinimumVersion=3.0
+qgisMaximumVersion=3.99
+description=Scientific raster visualization plugin for QGIS — styled after rasterio.show(), with interactive GUI controls for colormap selection, percentile/minmax stretch, pointed colorbar, discrete classification, RGB composite, and multi-map layout series.
+version=1.1.0
+author=Defani Arman Alfitriansyah
+email=defaniarman@gmail.com
+about=RasterViz provides publication-quality raster visualization directly within QGIS, without requiring an external Python environment. The plugin replicates the rendering aesthetics of rasterio.show() with full control over colormaps, stretching, colorbar styling, grid formatting, coordinate labels, and multi-map layouts.
+tracker=https://github.com/Defani/QRasterVIZ
+repository=https://github.com/Defani/QRasterVIZ
+homepage=https://github.com/Defani/QRasterVIZ
+hasProcessingProvider=no
+tags=raster, visualization, colormap, legend, colorbar, remote sensing, ndvi, rgb composite, stretch, mangrove, biomass, sentinel-2, landsat, classification, discrete
+category=Raster
+icon=icon.png
+experimental=False
+deprecated=False
+changelog=Version 1.1.0 (2026): Initial public release. Includes Single-band continuous rendering, Discrete/classified rendering, RGB composite, customizable Pointed colorbar, coordinate tick formatting, grid control, multi-map layout series with live updates, and full export suite (PNG 300 DPI, SVG, TIFF, PDF).
