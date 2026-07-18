@@ -1,8 +1,8 @@
-<img src="icon.png" alt="RasterViz Icon" width="80"/>
+<img src="rasterviz-1.1.0/icon.png" alt="RasterViz Icon" width="80"/>
 
 # **RasterViz** — QGIS Plugin
 
-> ⚠️ **Note on the official QGIS Plugin Repository:** as of this writing, the listing at **[plugins.qgis.org/plugins/qrviz](https://plugins.qgis.org/plugins/qrviz/)** is still on **v1.1.0** and has not been updated to reflect v1.2.0 through v1.4.0 described below. Until that listing catches up, install the current version manually via **Install from ZIP** using the release attached to this repository (see [Installation](#-installation)) rather than through *Plugins → Manage and Install Plugins → All*.
+> ⚠️ **Note on the official QGIS Plugin Repository:** as of this writing, the listing at **[plugins.qgis.org/plugins/qrviz](https://plugins.qgis.org/plugins/qrviz/)** is still on **v1.1.0** and has not been updated to v1.4.0. Download the latest release from this repository's Releases page instead.
 
 ![QGIS](https://img.shields.io/badge/QGIS-3.0%2B-589632?logo=qgis&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
@@ -11,7 +11,7 @@
 ![Dependencies](https://img.shields.io/badge/Dependencies-ZERO-brightgreen)
 ![License](https://img.shields.io/badge/License-GPLv2%2B-blue)
 
-**RasterViz** is a publication-quality raster & vector visualization plugin for QGIS, styled after `rasterio.show()`. Pick a colormap, choose a stretch, drop a legend, overlay vector data, add a web basemap, and export a print-ready figure — all through an interactive dialog docked right next to your QGIS project, with live preview at every step.
+**RasterViz** is a publication-quality raster & vector visualization plugin for QGIS, styled after `rasterio.show()`. Pick a colormap, choose a stretch, drop a legend, overlay vector data, add a web basemap, grid, scale bar, and north arrow — then export at 300 DPI.
 
 <img width="1920" height="1080" alt="Screenshot 2026-07-18 161214" src="https://github.com/user-attachments/assets/fd4a1d3a-f018-43d9-a080-e49afa667fdb" />
 <img width="1920" height="1080" alt="Screenshot 2026-07-18 161223" src="https://github.com/user-attachments/assets/2788705f-c6e7-4c42-ae42-2d5b6c1647c0" />
@@ -21,18 +21,17 @@
 
 
 
-
 ---
 
 ## 🆕 What's New in v1.4.0 — Zero Third-Party Dependencies
 
-The web basemap layer used to be powered by [contextily](https://contextily.readthedocs.io/) (a pip package) — the *only* third-party dependency RasterViz had left after v1.3.0. In v1.4.0, that's gone too:
+The web basemap layer used to be powered by [contextily](https://contextily.readthedocs.io/) (a pip package) — the *only* third-party dependency RasterViz had left after v1.3.0. In v1.4.0, that's gone entirely.
 
-* **Native QGIS basemap engine.** Basemaps are now fetched, tiled, and reprojected entirely by QGIS itself — a native `QgsRasterLayer` XYZ connection (the same URI scheme the [QuickMapServices](https://github.com/qgis/QuickMapServices) plugin uses for its own TMS layers) rendered through QGIS's own map-render pipeline (`QgsMapRendererCustomPainterJob`). No pip install, no "Install Dependencies" step, nothing to break across QGIS Python environments.
+* **Native QGIS basemap engine.** Basemaps are now fetched, tiled, and reprojected entirely by QGIS itself — a native `QgsRasterLayer` XYZ connection (the same URI scheme the [QuickMapServices](https://github.com/qgis/QuickMapServices) plugin uses). No more contextily, no more GDAL virtual file I/O, no more tile warping.
 * **"Install Dependencies" removed.** The header button, the one-time first-run notice, and the whole `deps_manager` / `deps_worker` / `deps_dialog` install flow are gone — there's nothing left to install.
-* **Same alignment guarantees.** Because QGIS's own renderer does the reprojection (not a manual tile-warp), basemap alignment against your raster/vector layers is exact — including for non-Web-Mercator project CRS like UTM.
+* **Same alignment guarantees.** Because QGIS's own renderer does the reprojection (not a manual tile-warp), basemap alignment against your raster/vector layers is exact — including for non-Web-Mercator CRSes.
 * **Same basemap cache.** Per-(provider, CRS, view) caching still works exactly as before — an unrelated control tweak (title, font, decimals…) doesn't re-render the basemap from scratch.
-* **More basemaps.** The provider list grew from 24 to **49** entries — Esri polar imagery, NASA GIBS (VIIRS night lights, MODIS true color, ASTER shaded relief), several national mapping agencies (Germany's BaseMapDE/TopPlusOpen, Switzerland's swisstopo, the Netherlands' PDOK/nlmaps, USGS), OpenRailwayMap, WaymarkedTrails, OpenSnowMap, SafeCast, MtbMap, OPNVKarte, FreeMapSK, and OpenAIP (non-commercial license, flagged accordingly in its display name).
+* **More basemaps.** The provider list grew from 24 to **49** entries — Esri polar imagery, NASA GIBS (VIIRS night lights, MODIS true color, ASTER shaded relief), several national mapping agencies (Germany, Switzerland, Netherlands, United States, and more), OpenStreetMap variants, and others.
 
 RasterViz now has **zero third-party Python dependencies** — everything runs on what QGIS already ships (PyQGIS, NumPy, Matplotlib, PyQt5).
 
@@ -42,9 +41,9 @@ RasterViz now has **zero third-party Python dependencies** — everything runs o
 
 * **🗂️ Interactive Layer Manager:** Manage any number of raster and vector layers in one panel — mix layers already in your QGIS project with ones opened directly from disk.
 * **🛰️ Raster Rendering:** Single-band rendering (continuous & discrete/classified with per-class color, label, and decimals) plus RGB composite with independent per-band stretch.
-* **🎨 Colormap Library:** Custom scientific palettes (NDVI, LST, mangrove/carbon stock, SAR backscatter, and more) alongside the full Matplotlib colormap set, with percentile / min-max / manual stretch.
+* **🎨 Colormap Library:** Custom scientific palettes (NDVI, LST, mangrove/carbon stock, SAR backscatter, and more) alongside the full Matplotlib colormap set, with percentile / min-max / manual stretch modes.
 * **🗺️ Vector Symbology:** Render Shapefiles, KML/KMZ, and GeoPackages with customizable fill, stroke, and categorized (by-field) colors.
-* **🌐 Dynamic Basemaps:** Instantly overlay your data on 49 basemaps — Esri, OpenStreetMap, CartoDB, OpenTopoMap, NASA GIBS, national mapping agencies, and more — drawn behind your layers, rendered 100% natively by QGIS.
+* **🌐 Dynamic Basemaps:** Instantly overlay your data on 49 basemaps — Esri, OpenStreetMap, CartoDB, OpenTopoMap, NASA GIBS, national mapping agencies, and more — drawn behind your layers, rendered natively by QGIS.
 * **📐 Cartographic Tools:** Coordinate grid with DMS / DM / Decimal Degree / UTM tick formatting, scale bar, and a dynamic north arrow.
 * **🖼️ Layout / Multi-Map Series:** Compose several maps together into one figure panel.
 * **🌙 Dark / Light Mode:** Follows QGIS's own active theme and font — no forced styling.
@@ -55,7 +54,7 @@ RasterViz now has **zero third-party Python dependencies** — everything runs o
 ## 📋 Requirements
 
 * **QGIS 3.0 – 3.99**, with its bundled Python 3.
-* **Nothing else.** Raster reading, vector reading, and web basemaps are all 100% QGIS-native (`QgsRasterLayer`, `QgsVectorLayer`, `QgsMapRendererCustomPainterJob`). There is no optional-dependency table anymore — every feature works the moment the plugin is installed.
+* **Nothing else.** Raster reading, vector reading, and web basemaps are all 100% QGIS-native (`QgsRasterLayer`, `QgsVectorLayer`, `QgsMapRendererCustomPainterJob`). There is no optional-dependency tangle. Zero runtime imports outside the PyQGIS/PyQt5/NumPy/Matplotlib stack that QGIS ships.
 
 ---
 
@@ -66,7 +65,7 @@ RasterViz now has **zero third-party Python dependencies** — everything runs o
 3. Select the downloaded zip and click **Install Plugin**.
 4. Open it from **Raster menu → RasterViz**, or the toolbar icon.
 
-If you're upgrading from a v1.3.x install that once used the old "Install Dependencies" button, it's worth deleting the old plugin folder outright before installing the new zip, so any leftover `vendor/` folder from that flow doesn't linger on disk.
+If you're upgrading from a v1.3.x install that once used the old "Install Dependencies" button, it's worth deleting the old plugin folder outright before installing the new zip, so any leftover `vendored/` folder isn't mistaken for part of the new install.
 
 ---
 
@@ -86,9 +85,9 @@ If you're upgrading from a v1.3.x install that once used the old "Install Depend
 |---|---|
 | **1.4.0** | Contextily replaced by a native QGIS XYZ basemap engine. Zero third-party dependencies. Basemap list expanded 24 → 49. "Install Dependencies" removed entirely. |
 | **1.3.1** | Fixed a Colorbar-tab layout gap; narrowed the settings panel. "Install Dependencies" gained a fallback for disabled user site-packages. Added the per-(provider, CRS, view) basemap cache. |
-| **1.3.0** | Raster and vector engines made 100% QGIS-native — rasterio, geopandas, and fiona no longer needed. Vector rendering moved onto QGIS's own `QgsFeatureRequest` pipeline (reprojection, spatial filtering, on-the-fly simplification). Added the in-app "Install Dependencies" dialog. Removed qtawesome (replaced by a built-in SVG icon set) and the forced dark-mode/font styling. |
-| **1.2.0** | Rebuilt on the multi-layer engine from the standalone RasterViz edition: unified raster+vector layer panel, vector overlays, web basemaps (via contextily), expanded colormap library, north arrow, scale bar, rasterio-backed multi-format raster reading. |
-| **1.1.0** | Initial public release — this is the version currently listed on plugins.qgis.org. Single-band continuous/discrete rendering, RGB composite, pointed colorbar, coordinate tick formatting (DMS/DM/DD/UTM), live preview, export to PNG/SVG/TIFF/PDF. |
+| **1.3.0** | Raster and vector engines made 100% QGIS-native — rasterio, geopandas, and fiona no longer needed. Vector rendering moved onto QGIS's own `QgsFeatureRequest` pipeline (reprojection, splitting, rendering). |
+| **1.2.0** | Rebuilt on the multi-layer engine from the standalone RasterViz edition: unified raster+vector layer panel, vector overlays, web basemaps (via contextily), expanded colormap library, north arrow, and SVG export. |
+| **1.1.0** | Initial public release — this is the version currently listed on plugins.qgis.org. Single-band continuous/discrete rendering, RGB composite, pointed colorbar, coordinate tick formatting, scale bar, PNG/PDF export. |
 
 Full per-release notes are in `metadata.txt`'s `changelog` field inside the plugin folder.
 
@@ -96,7 +95,7 @@ Full per-release notes are in `metadata.txt`'s `changelog` field inside the plug
 
 ## 🧭 Project History
 
-RasterViz began as this QGIS plugin, was rebuilt as a **[standalone desktop edition](https://github.com/Defani/RasterViz)** to run without QGIS installed (adding the multi-layer panel, vector overlays, dynamic basemaps, and dark/light theming), and has now had that complete feature set brought back into the QGIS plugin — so both editions share the same rendering engine and feature parity going forward.
+RasterViz began as this QGIS plugin, was rebuilt as a **[standalone desktop edition](https://github.com/Defani/RasterViz)** to run without QGIS installed (adding the multi-layer panel, vector overlays, and layout engine), and then ported back into the QGIS plugin in v1.2.0.
 
 ---
 
@@ -106,16 +105,16 @@ This plugin exists because of the monumental efforts of the open-source GIS and 
 
 **Currently powering RasterViz (runtime dependencies):**
 
-* **[QGIS](https://qgis.org/) / PyQGIS:** The desktop GIS platform this plugin is built for and built on — raster reading, vector reading, coordinate transforms, and now the web basemap render pipeline all run through PyQGIS.
+* **[QGIS](https://qgis.org/) / PyQGIS:** The desktop GIS platform this plugin is built for and built on — raster reading, vector reading, coordinate transforms, and now the web basemap render pipeline.
 * **[Matplotlib](https://matplotlib.org/):** The backbone of our map rendering, turning raw arrays into beautiful cartography.
 * **[NumPy](https://numpy.org/):** For the blazingly fast array operations required in image processing and the QImage → RGBA conversion behind the native basemap engine.
 * **PyQt5 (via `qgis.PyQt`):** The GUI toolkit behind the entire dialog.
 
 **Pattern & data credits for the native basemap engine (v1.4.0):**
 
-* **[QuickMapServices](https://github.com/qgis/QuickMapServices)** (GPLv2+): the native `type=xyz&zmin=…&zmax=…&url=…` / `QgsRasterLayer(..., "wms")` connection pattern RasterViz's `basemap_io.py` is built on comes directly from QMS's own `add_layer_to_map()` TMS-layer handling — huge thanks to the QMS maintainers for keeping that pattern simple and reliable.
-* **[xyzservices](https://github.com/geopandas/xyzservices)** / **[leaflet-providers](https://github.com/leaflet-extras/leaflet-providers)** (BSD 2-Clause): the tile URL templates, zoom limits, and attribution strings for the built-in basemap list were cross-checked against this database — the same one contextily itself was built on.
-* **Klas Karlsson** ([reference script](https://bit.ly/4eDbx1O)): the expanded basemap batch added in v1.4.0 (BaseMapDE, TopPlusOpen, SwissFederalGeoportal, nlmaps, USGS, WaymarkedTrails, OpenSnowMap, OpenRailwayMap, SafeCast, MtbMap, OPNVKarte, FreeMapSK, OpenAIP, and NASA GIBS extras) was sourced from a QGIS-connections script by Klas Karlsson, extended here with additional entries curated from xyzservices.
+* **[QuickMapServices](https://github.com/qgis/QuickMapServices)** (GPLv2+): the native `type=xyz&zmin=…&zmax=…&url=…` / `QgsRasterLayer(..., "wms")` connection pattern RasterViz's `basemap_io.py` now follows.
+* **[xyzservices](https://github.com/geopandas/xyzservices)** / **[leaflet-providers](https://github.com/leaflet-extras/leaflet-providers)** (BSD 2-Clause): the tile URL templates, zoom limits, and attribution strings.
+* **Klas Karlsson** ([reference script](https://bit.ly/4eDbx1O)): the expanded basemap batch added in v1.4.0 (BaseMapDE, TopPlusOpen, SwissFederalGeoportal, nlmaps, USGS, WaymarkedTrails, OpenSnowMap, and others).
 
 **Historical thanks (dependencies used in earlier releases, no longer required as of v1.4.0):**
 
@@ -129,7 +128,7 @@ This plugin exists because of the monumental efforts of the open-source GIS and 
 ---
 
 **Author:** Defani Arman Alfitriansyah — defaniarman@gmail.com
-**Repository:** https://github.com/Defani/QRasterVIZ
+**Repository:** https://github.com/Defani/RasterViz
 **License:** GNU GPL v2 or later — see `LICENSE`.
 
 ## License
