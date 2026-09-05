@@ -1,6 +1,6 @@
 # RasterViz — Scientific Raster Visualization for QGIS
 
-<img src="qrviz/icon.png" alt="RasterViz Icon" width="80"/>
+
 
 ![QGIS](https://img.shields.io/badge/QGIS-589632?style=flat-square&logo=qgis&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
@@ -15,7 +15,7 @@
 QGIS plugin family that renders publication-quality raster and vector maps directly inside QGIS, styled after Python's `rasterio.show()`. Pick a colormap, choose a stretch, drop a legend, overlay vector data, add a web basemap, grid, scale bar, and north arrow — then export at 300 DPI, or build the same scientific-style colorbar natively inside a QGIS Print Layout. Zero third-party Python dependencies, in every version.
 
 Author: Defani Arman Alfitriansyah
-<img width="1920" height="1080" alt="Screenshot 2026-08-17 064606" src="https://github.com/user-attachments/assets/d43969a1-79f6-4934-bbdb-8c5f185cbb27" />
+
 
 ## Versions
 
