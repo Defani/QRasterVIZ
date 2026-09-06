@@ -9,13 +9,40 @@
 
 ![Dependencies](https://img.shields.io/badge/Dependencies-ZERO-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-GPLv2%2B-lightgrey?style=flat-square)
-[![Downloads](https://img.shields.io/badge/Downloads-1000%2B%20worldwide-orange?style=flat-square)](https://plugins.qgis.org/plugins/qrviz/)
-[![Votes](https://img.shields.io/badge/Votes-10-yellow?style=flat-square)](https://plugins.qgis.org/plugins/qrviz/)
+[![Downloads](https://img.shields.io/badge/Downloads-1%2C103%20worldwide-orange?style=flat-square)](https://plugins.qgis.org/plugins/qrviz/)
+[![Votes](https://img.shields.io/badge/Votes-12-yellow?style=flat-square)](https://plugins.qgis.org/plugins/qrviz/)
+
+> **📦 Latest release: [v2.11.2](https://github.com/Defani/RasterViz/releases/tag/v2.11.2)** — recommended for all new installs.
+> `sha256: e2a1576558ab92017a9500264d3544c36d3743b87016b9783d0b4ba0377bd7fd`
 
 QGIS plugin that produces scientific/publication-style raster visualizations. Built as a few different approaches over time, a standalone dialog window with a full toolkit (colormap gallery, stretch modes, RGB composite, vector overlays, web basemaps, one-shot export), and now a native Layout item for building the same scientific-style colorbar directly inside a QGIS Print Layout. Each approach has been progressively simplified so the same publication-style result is easier to get to. Zero third-party Python dependencies, in every release.
 
+**Start with v2.11.2 if you're new here.** It's the easiest way to get a publication-style colorbar: no separate dialog window, no manual export step — it drops straight into QGIS's own Print Layout next to North Arrow/Scale Bar/Legend, reads its colours live off your raster layer's own symbology, and updates instantly through its own "RasterViz" dock panel. The 2.11.x line has mostly been stability/compatibility fixes on top of that (see [What's New](#whats-new) below); v1.4.5 remains available separately for anyone who specifically needs the older standalone toolkit (RGB composite, web basemaps, discrete classification).
+
 Author: Defani Arman Alfitriansyah
 
+## What is RasterViz?
+
+RasterViz is a QGIS plugin (Plugin ID **5157** on the official [QGIS Plugin Repository](https://plugins.qgis.org/plugins/qrviz/)) for producing scientific, publication-style raster visualizations without leaving QGIS. It's shipped as two parallel lines: **v1.x**, a standalone dialog window with a full cartographic toolkit (colormap gallery, RGB composite, web basemaps, discrete classification, one-shot export), and **v2.x (Layout-native)**, a lighter native Layout item scoped to just the colorbar, built to sit directly inside QGIS's own Print Layout alongside North Arrow, Scale Bar and Legend. Both lines have zero third-party Python dependencies.
+
+### Repository status
+
+| | |
+|---|---|
+| Plugin ID | 5157 |
+| Repository page | [plugins.qgis.org/plugins/qrviz](https://plugins.qgis.org/plugins/qrviz/) |
+| Total downloads (all versions) | 1,103 |
+| Votes | 12 |
+| Latest version | **2.11.2** — security scan passed, awaiting manual repository approval |
+| Latest publicly listed version | 1.4.5 |
+
+| Version | QGIS ≥ | QGIS ≤ | Downloads | Released | Status |
+|---|---|---|---|---|---|
+| 2.11.2 | 3.16.0 | 3.99.0 | 0 | Sep 6, 2026 | Security scan passed, pending manual repository approval |
+| 1.4.5 | 3.0.0 | 3.99.0 | 311 | Aug 16, 2026 | Published |
+| 1.1.0 | 3.0.0 | 3.99.0 | 792 | May 8, 2026 | Published (archived, superseded by 1.4.5) |
+
+**v2.11.2 automated Security & Quality Scan** (Sep 6, 2026, 12:20 PM GMT+7): 100.0% pass rate — 5 passed, 0 info items, 0 warnings, 0 critical, across 26 files scanned, 0 total issues. Manual moderator review for public listing is the only step left.
 
 ## What's New
 
@@ -82,6 +109,70 @@ deliberately narrow (just the colorbar) so it stays a small,
 complementary addition to QGIS's native layout toolkit, while v1.4.5
 remains around for anyone still on the full standalone toolkit.
 
+## Full Version History
+
+RasterViz is one continuously-versioned plugin (ID 5157), not a set of
+forks — but only **3 versions have ever been submitted to the QGIS
+Plugin Repository**: v1.1.0, v1.4.5, and v2.11.2 (pending approval).
+Everything else below is real, documented iteration between those
+three — 8 intermediate versions on the v1.x dialog line, and 19 on the
+v2.x Layout-native line — that shipped as source history and changelog
+entries but was never submitted individually.
+
+> ⚠️ **Open discrepancy:** the plugin's own `metadata.txt` changelog
+> frames its pre-rewrite coverage as *"Version 1.4.7 and earlier"*,
+> but this README's own Versions/What's New tables treat **1.4.5** as
+> the latest v1.x release. Whether 1.4.6/1.4.7 exist with undocumented
+> changes, or that phrase is stale boilerplate, isn't resolved here —
+> worth checking against the actual repository version history before
+> the next release.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': 'transparent', 'primaryColor': '#ffffff', 'primaryBorderColor': '#000000', 'primaryTextColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#000000', 'fontFamily': 'Georgia, "Times New Roman", serif'}}}%%
+flowchart TD
+    subgraph v1["v1.x — standalone dialog (Matplotlib)"]
+        direction TB
+        v110["v1.1.0 — published<br/>First public release: single-band, discrete,<br/>RGB composite, colorbar"]
+        v120["v1.2.0<br/>Ported back from the standalone desktop edition<br/>+ vector overlays (GeoPandas/Fiona)<br/>+ Contextily web basemaps"]
+        v130["v1.3.0<br/>QtAwesome icons replaced by a built-in SVG set"]
+        v131["v1.3.1<br/>Last version still using Contextily"]
+        v140["v1.4.0<br/>Contextily replaced by a native QGIS XYZ engine<br/>Zero third-party dependencies reached"]
+        v141["v1.4.1<br/>UI reorganized into labeled group boxes<br/>All in-app icons removed"]
+        v142["v1.4.2<br/>Skips the no-data mask loop when not needed"]
+        v143["v1.4.3<br/>Removed the 300px cap on the settings panel"]
+        v144["v1.4.4<br/>Fixed basemap/overlay alignment offset"]
+        v145["v1.4.5 — published<br/>Fixed 10 Bandit B110/B112 findings"]
+        v110 --> v120 --> v130 --> v131 --> v140 --> v141 --> v142 --> v143 --> v144 --> v145
+    end
+
+    subgraph v2["v2.x — Layout-native (pure PyQGIS + PyQt5)"]
+        direction TB
+        v200["v2.0.0 — complete rewrite<br/>Scope cut to one native Layout colorbar item<br/>Matplotlib dependency removed entirely"]
+        v210["v2.1.0<br/>Embeds native Position/Size/Rotation/Frame widget<br/>+ Number of colors, Reverse, Bar thickness, Tick position"]
+        v220["v2.2.0<br/>Dedicated dock panel added to every Layout window<br/>+ Rounded corners, adjustable padding"]
+        v221["v2.2.1<br/>Fixed empty-state/item-form switch crash"]
+        v230["v2.3.0<br/>Renamed to 'RasterViz Colorbar'"]
+        v240["v2.4.0<br/>Removed Bar thickness setting<br/>+ Text color (Black/White) option"]
+        v241["v2.4.1<br/>Fixed the drawn bar not growing to match Width/Height"]
+        v242["v2.4.2<br/>Text and bar geometry unified via QgsTextRenderer"]
+        v250["v2.5.0<br/>Fixed a NaN colorbar bug<br/>+ independent tick/label colour and font"]
+        v260["v2.6.0<br/>Domain colour ramps (NDVI/mangrove/water/...) via QgsStyle"]
+        v270["v2.7.0<br/>Removed the custom ramps<br/>+ Discrete (stepped) bar style"]
+        v280["v2.8.0<br/>Renamed display name to plain 'RasterViz'"]
+        v290["v2.9.0<br/>Auto-switches the layer to Singleband pseudocolor on pick"]
+        v291["v2.9.1<br/>Fixed dock panel tab grouping on first install"]
+        v292["v2.9.2<br/>Layout Map items now refresh immediately on ramp change"]
+        v2100["v2.10.0<br/>Added Min/Max and Interpolation controls"]
+        v2101["v2.10.1<br/>Collapsed panel heading, added the plugin's icon"]
+        v2110["v2.11.0<br/>Removed the native Position/Size block from the panel"]
+        v2111["v2.11.1<br/>Cleared old QRVIZ-tagged colour ramps from QGIS's style DB"]
+        v2112["v2.11.2 — latest, pending approval<br/>Fixed Bandit Try/Except/Pass findings<br/>Security scan: 100% pass rate, 0 issues"]
+        v200 --> v210 --> v220 --> v221 --> v230 --> v240 --> v241 --> v242 --> v250 --> v260 --> v270 --> v280 --> v290 --> v291 --> v292 --> v2100 --> v2101 --> v2110 --> v2111 --> v2112
+    end
+
+    v145 -.->|"complete rewrite, not incremental"| v200
+```
+
 ## Render pipeline
 
 Each version gets its colours to the page a different way, v2 reads
@@ -92,6 +183,7 @@ array to Matplotlib.
 ### v2.11.2 (Layout-native)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': 'transparent', 'primaryColor': '#ffffff', 'primaryBorderColor': '#000000', 'primaryTextColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#000000', 'fontFamily': 'Georgia, "Times New Roman", serif'}}}%%
 flowchart TD
     A[Linked raster layer] --> B[Read its renderer: Singleband pseudocolor or Gray]
     B --> C[Get colour ramp + classification Min/Max]
@@ -109,6 +201,7 @@ flowchart TD
 RasterViz reproduces `rasterio.show()`'s rendering behavior without needing rasterio, GDAL bindings, or any pip package, everything is read through QGIS-native APIs and handed to the same Matplotlib call.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': 'transparent', 'primaryColor': '#ffffff', 'primaryBorderColor': '#000000', 'primaryTextColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#000000', 'fontFamily': 'Georgia, "Times New Roman", serif'}}}%%
 flowchart TD
     A[QGIS raster layer] --> B[raster_io.py, block decode to NumPy array]
     B --> C{Stretch mode}
@@ -158,8 +251,33 @@ pending QGIS Plugin Repository approval, so for now it installs
 manually:
 
 1. Download [`releases/RasterViz-v2-layout-native-2.11.2.zip`](releases/RasterViz-v2-layout-native-2.11.2.zip)
-2. In QGIS: **Plugins → Manage and Install Plugins → Install from ZIP**, point it at the downloaded file, and click **Install Plugin**
-3. Open a Print Layout, the colorbar item and its **RasterViz** dock panel appear automatically
+
+2. In QGIS, open **Plugins → Manage and Install Plugins…**
+
+  <img width="354" height="182" alt="Screenshot 2026-09-06 125828" src="https://github.com/user-attachments/assets/cd1d83b0-94ce-455b-a79b-cdc912f93200" />
+
+
+3. Go to the **Install from ZIP** tab, click **…** next to "ZIP file", and browse to the downloaded zip
+
+   <img width="1013" height="749" alt="Screenshot 2026-09-06 131231" src="https://github.com/user-attachments/assets/910f92a0-6009-48b9-ab17-1cdbf5621a73" />
+
+
+
+4. Select the file and click **Open** — the path fills in the ZIP file field, then click **Install Plugin**
+
+  <img width="877" height="605" alt="Screenshot 2026-09-06 125959" src="https://github.com/user-attachments/assets/ef596603-1e28-4eec-b627-75eb0cda820a" />
+
+
+5. Wait for the green **"Plugin installed successfully"** banner
+
+  <img width="990" height="728" alt="Screenshot 2026-09-06 130028" src="https://github.com/user-attachments/assets/80fbdacf-94e0-4902-8ef4-ff5e6e363bee" />
+
+
+6. How to use?
+   <img width="720" height="382" alt="Screen Recording 2026-09-06 130426" src="https://github.com/user-attachments/assets/78158248-8a00-4bb6-982f-9fb0f048c01f" />
+
+
+
 
 If what's needed is the full standalone toolkit instead (colormap
 gallery, RGB composite, basemaps, discrete classification, one-shot
