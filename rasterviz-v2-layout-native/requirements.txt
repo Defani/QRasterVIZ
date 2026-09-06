@@ -1,0 +1,6 @@
+# RasterViz (Layout-native method) — dependencies
+#
+# None. This plugin is a single native QgsLayoutItem built with PyQGIS +
+# PyQt5 only. It reads colours/value range directly from a raster layer's
+# own renderer (QgsSingleBandPseudoColorRenderer / QgsSingleBandGrayRenderer)
+# — no Matplotlib, no rasterio/geopandas/fiona/contextily.
