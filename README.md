@@ -16,6 +16,8 @@
 > `sha256: e2a1576558ab92017a9500264d3544c36d3743b87016b9783d0b4ba0377bd7fd`
 
 QGIS plugin that produces scientific/publication-style raster visualizations. Built as a few different approaches over time, a standalone dialog window with a full toolkit (colormap gallery, stretch modes, RGB composite, vector overlays, web basemaps, one-shot export), and now a native Layout item for building the same scientific-style colorbar directly inside a QGIS Print Layout. Each approach has been progressively simplified so the same publication-style result is easier to get to. Zero third-party Python dependencies, in every release.
+<img width="1920" height="1080" alt="Screenshot 2026-09-06 130720" src="https://github.com/user-attachments/assets/55033ca7-8904-4ac9-9c1e-2660d490f5b9" />
+
 
 **Start with v2.11.2 if you're new here.** It's the easiest way to get a publication-style colorbar: no separate dialog window, no manual export step — it drops straight into QGIS's own Print Layout next to North Arrow/Scale Bar/Legend, reads its colours live off your raster layer's own symbology, and updates instantly through its own "RasterViz" dock panel. The 2.11.x line has mostly been stability/compatibility fixes on top of that (see [What's New](#whats-new) below); v1.4.5 remains available separately for anyone who specifically needs the older standalone toolkit (RGB composite, web basemaps, discrete classification).
 
